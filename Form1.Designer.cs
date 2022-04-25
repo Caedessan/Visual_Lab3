@@ -119,6 +119,7 @@
             this.adbox.Size = new System.Drawing.Size(160, 23);
             this.adbox.TabIndex = 11;
             this.adbox.TextChanged += new System.EventHandler(this.adbox_TextChanged);
+            this.adbox.LostFocus += new System.EventHandler(this.trytoparsedate);
             // 
             // label5
             // 
@@ -153,6 +154,7 @@
             this.ddbox.Size = new System.Drawing.Size(160, 23);
             this.ddbox.TabIndex = 7;
             this.ddbox.TextChanged += new System.EventHandler(this.ddbox_TextChanged);
+            this.ddbox.LostFocus += new System.EventHandler(this.trytoparsedate);
             // 
             // label7
             // 

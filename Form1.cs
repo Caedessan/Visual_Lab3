@@ -206,7 +206,14 @@ namespace Visual_Lab3
                 _isFiltered = 0;
             }
         }
-        private bool compare(string date,string dateless)
+        private bool dcompare(string date,string dateless)
+        {
+            var d = Convert.ToDateTime(date);
+            var dl = Convert.ToDateTime(dateless);
+            if (d < dl) return true;
+            else return false;
+        }
+        private bool tcompare(string date, string dateless) 
         {
 
             return true;
@@ -217,11 +224,18 @@ namespace Visual_Lab3
             {
                 return;
             }
-            var dd = DateTime.Parse(ddbox.Text);
-            var filteredData =
+            try
+            {
+                var dd = DateTime.Parse(ddbox.Text);
+            }
+            catch
+            {
+                var dd = DateTime.Parse("1/1/2000");
+            }
+                var filteredData =
                 from Bus in Program.Buses
-                where Bus.DepartureDate == ddbox.Text
-                && Bus.DepartureTime == dtbox.Text
+                where dcompare(Bus.ArrivalDate,adbox.Text)
+                && Bus.Destination==destinationbox.Text
                 select Bus.Number;
             var count = filteredData.Count();
             filteredData = filteredData.Distinct();
@@ -232,7 +246,18 @@ namespace Visual_Lab3
             }
             MessageBox.Show(message);
         }
-
+        private void trytoparsedate(object sender, EventArgs e)
+        {
+            var tb = sender as TextBox;
+            try
+            {
+                Convert.ToDateTime(tb.Text);
+            }
+            catch
+            {
+                tb.Text = "";
+            }
+        }
         private void numberbox_TextChanged(object sender, EventArgs e)
         {
 
